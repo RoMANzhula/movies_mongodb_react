@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/v1")
 public class MovieController {
@@ -33,7 +32,7 @@ public class MovieController {
         return new ResponseEntity<>(movieService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/movies/find_by_imdbid/{imdbId}")
+    @GetMapping("/movies/find_by_imdbId/{imdbId}")
     public ResponseEntity<Optional<Movie>> getMovieByImdbId(
             @PathVariable String imdbId
     ) {

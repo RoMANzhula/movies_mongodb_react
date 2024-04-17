@@ -24,13 +24,13 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
     try {
       const response = await api.post("/api/v1/reviews",{reviewBody:rev.value,imdbId:movieId});
 
-      const updatedReviews = [...reviews, {body:rev.value}];
+      const updatedReviews = [{...reviews}, {body:rev.value}];
 
       rev.value = "";
 
       setReviews(updatedReviews);
-    } catch(err) {
-      console.error(err);
+    } catch(error) {
+      console.error(error);
     }
 
   }
@@ -42,7 +42,7 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
       </Row>
       <Row className="mt-2">
         <Col>
-          <img src={movie?.poster} alt="" />
+          <img src={movie?.poster} alt='' />
         </Col>
         <Col>
           {
@@ -60,18 +60,18 @@ const Reviews = ({getMovieData,movie,reviews,setReviews}) => {
             </>
           }
           {
-            reviews?.map((rev) => {
+            reviews?.map((r, index) => {
               return (
-                <>
+                <React.Fragment key={index}>
                   <Row>
-                    <Col>{rev.body}</Col>
+                    <Col>{r.body}</Col>
                   </Row>
                   <Row>
                     <Col>
                       <hr />
                     </Col>
                   </Row>
-                </>
+                </React.Fragment>
               )
             })
           }
