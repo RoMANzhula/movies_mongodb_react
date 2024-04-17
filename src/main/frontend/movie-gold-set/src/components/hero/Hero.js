@@ -29,7 +29,7 @@ const Hero = ({movies}) => {
                         <img src={movie.poster} alt='' />
                       </div>
                       <div className='movie-title'>
-                        <h3>{movie.title}</h3>
+                        <h2>{movie.title}</h2>
                       </div>
                       <div className='movie-buttons-container'>
                         <Link to={`/Trailer/${movie.trailerLink.substring(movie.trailerLink.length - 11)}`}>
@@ -40,7 +40,7 @@ const Hero = ({movies}) => {
                           </div>
                         </Link>
                         <div className='movie-review-button-container'>
-                          <Button variant='info' onClick={() => reviews(movie.imdbId)}>Reviews</Button>
+                          <Button variant='outline-light' onClick={() => reviews(movie.imdbId)}>Reviews</Button>
                         </div>
                       </div>
                     </div>
