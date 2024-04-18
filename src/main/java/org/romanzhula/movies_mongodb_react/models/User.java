@@ -47,4 +47,10 @@ public class User {
 
     @DocumentReference
     private List<Review> reviewIds;
+
+    public User(String username, String email, String encodedPassword) {
+        this.username = username;
+        this.email = email;
+        this.password = encodedPassword;
+    }
 }
