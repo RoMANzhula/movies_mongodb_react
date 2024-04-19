@@ -29,7 +29,7 @@ const Header = () => {
           <Button variant="outline-secondary" className="me-2">Tickets</Button>
           <Login />
           <Register />
-          </Navbar.Collapse>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   )
