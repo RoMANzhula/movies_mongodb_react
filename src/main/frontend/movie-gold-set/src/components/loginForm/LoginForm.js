@@ -23,7 +23,7 @@ const Login = () => {
         if (response && response.username) {
           handleClose();
           // Our logic after success sign in
-          navigate("/fullMovies");
+          navigate("/");
           window.location.reload();
         }
       }).catch((error) => {

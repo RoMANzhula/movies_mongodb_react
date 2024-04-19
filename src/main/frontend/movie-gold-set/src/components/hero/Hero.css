@@ -53,12 +53,12 @@
 .play-button-icon-container{
     padding:0px;
     margin:0px;
-    width:150px;
+    width:100px;
 }
 .play-button-icon{
     padding:0px;
     margin:0px;
-    color:gold;
+    color:rgb(14, 199, 32);
     font-size: 3rem;
     transition: 0.3s;
     cursor: pointer;
@@ -67,6 +67,28 @@
     font-size: 4rem;
     color:white;
 }
+
+.play-button-icon-container2{
+    padding:0px;
+    margin:0px;
+    width:150px;
+}
+.play-button-icon2{
+    padding:0px;
+    margin:0px;
+    color:gold;
+    font-size: 4rem;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.play-button-icon2:hover{
+    font-size: 5rem;
+    color:white;
+}
+
+.full-movie-link {
+    color: white;
+  }
 
 @media only screen and (max-width: 800px) {
     .movie-detail{

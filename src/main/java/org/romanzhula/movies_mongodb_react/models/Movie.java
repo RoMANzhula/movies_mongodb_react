@@ -26,6 +26,8 @@ public class Movie {
 
     private String trailerLink;
 
+    private String fullMovieLink;
+
     private String poster;
 
     private List<String> genres;

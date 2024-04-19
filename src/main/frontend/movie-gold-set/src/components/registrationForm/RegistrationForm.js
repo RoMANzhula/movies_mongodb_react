@@ -1,8 +1,9 @@
-import api from '../../api/axiosConfig';
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import AuthService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [show, setShow] = useState(false);
@@ -15,13 +16,17 @@ const Register = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/api/auth/register", { username, email, password, phone });
-      if (response.status === 200) {
+      const response = await AuthService.register(username, email, password, phone);
+      if (response && response.data.username) {
         handleClose();
-        // here will be some logic after success registration
+        // Our logic after success sign in
+        navigate("/login");
+        window.location.reload();
       }
     } catch (error) {
       setError("Registration failed. Please try again.");
