@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
+import Register from "../registrationForm/RegistrationForm";
+import Login from "../loginForm/LoginForm";
 
 
 const Header = () => {
@@ -25,9 +27,9 @@ const Header = () => {
             <NavLink className="nav-link" to="/watchList">Watch List</NavLink>
           </Nav>
           <Button variant="outline-secondary" className="me-2">Tickets</Button>
-          <Button variant="outline-light" className="me-2">Login</Button>
-          <Button variant="outline-warning">Register</Button>
-        </Navbar.Collapse>
+          <Login />
+          <Register />
+          </Navbar.Collapse>
       </Container>
     </Navbar>
   )
