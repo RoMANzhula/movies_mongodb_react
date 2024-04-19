@@ -1,7 +1,7 @@
 package org.romanzhula.movies_mongodb_react.configurations.security.jwt.components;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.romanzhula.movies_mongodb_react.configurations.security.implementations.UserDetailsImpl;
@@ -12,17 +12,12 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.WebUtils;
 
+import javax.crypto.SecretKey;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.function.Function;
-
-import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
-
-import javax.crypto.SecretKey;
 
 @Component
 public class JwtUtils {
@@ -74,9 +69,6 @@ public class JwtUtils {
                 .compact();
     }
 
-//    private SecretKey key() {
-//        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
-//    }
 
     private SecretKey key() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
