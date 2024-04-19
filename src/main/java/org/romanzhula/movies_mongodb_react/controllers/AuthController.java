@@ -1,5 +1,7 @@
 package org.romanzhula.movies_mongodb_react.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.romanzhula.movies_mongodb_react.configurations.security.implementations.UserDetailsImpl;
@@ -23,6 +25,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -147,6 +150,26 @@ public class AuthController {
                 new MessageResponse("User registered successfully!")
         );
 
+    }
+
+    @PostMapping("/sign_out")
+    public ResponseEntity<?> handleLogout(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
+        try {
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+            if (auth != null) {
+                new SecurityContextLogoutHandler().logout(request, response, auth);
+                return ResponseEntity.ok("Logout successful");
+            } else {
+                return ResponseEntity.status(401).body("Not authenticated");
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Internal Server Error");
+        }
     }
 
 }

@@ -1,8 +1,9 @@
-import api from '../../api/axiosConfig';
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import AuthService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -10,19 +11,26 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post("/api/auth/sign_in", { username, password });
-      if (response.status === 200) {
-        handleClose();
-        // here will be some logic after success sign in
-      }
+      await AuthService.login(username, password).then((response) => {
+        if (response && response.username) {
+          handleClose();
+          // Our logic after success sign in
+          navigate("/fullMovies");
+          window.location.reload();
+        }
+      }).catch((error) => {
+        setError("Incorrect username or password.");
+      });
     } catch (error) {
-      setError("Incorrect username or password.");
+      setError("Something went wrong.");
     }
   };
 
