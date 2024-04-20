@@ -6,6 +6,7 @@ import AuthService from "../../services/auth.service";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser())
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +24,7 @@ const Login = () => {
         if (response && response.username) {
           handleClose();
           // Our logic after success sign in
+          setCurrentUser(AuthService.getCurrentUser().username);
           navigate("/");
           window.location.reload();
         }
@@ -30,15 +32,31 @@ const Login = () => {
         setError("Incorrect username or password.");
       });
     } catch (error) {
-      setError("Something went wrong.");
+      setError("Something went wrong with Log_in.");
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await AuthService.logout();
+      setCurrentUser(null);
+      window.location.reload();
+    } catch (error) {
+      setError("Something went wrong with Log_out.");
     }
   };
 
   return (
     <>
-      <Button variant="outline-light" className="me-2" onClick={handleShow}>
-        Login
-      </Button>
+      {currentUser ? (
+        <Button variant="outline-light" className="me-2" onClick={handleLogout}>
+          Logout
+        </Button>
+      ) : (
+        <Button variant="outline-light" className="me-2" onClick={handleShow}>
+          Login
+        </Button>
+      )}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>

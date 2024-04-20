@@ -7,9 +7,20 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 import Register from "../registrationForm/RegistrationForm";
 import Login from "../loginForm/LoginForm";
+import { useEffect, useState } from "react";
+import AuthService from "../../services/auth.service";
 
 
 const Header = () => {
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user) {
+      setCurrentUser(user.username);
+    }
+  }, []);
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -26,13 +37,18 @@ const Header = () => {
             <NavLink className="nav-link" to="/">Home</NavLink>
             <NavLink className="nav-link" to="/watchList">Watch List</NavLink>
           </Nav>
+          <div style={{ flexGrow: 1, textAlign: "center", "color":'gold' }}>
+            <span>
+              <h4>{currentUser ? `Welcome, ${currentUser}` : ""}</h4>
+            </span>
+          </div>
           <Button variant="outline-secondary" className="me-2">Tickets</Button>
-          <Login />
+          <Login setCurrentUser={setCurrentUser} />
           <Register />
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
 export default Header
