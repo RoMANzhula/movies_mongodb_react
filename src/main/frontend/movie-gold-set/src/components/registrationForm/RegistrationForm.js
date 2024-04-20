@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const response = await AuthService.register(username, email, password, phone);
-      if (response && response.data.username) {
+      if (response.status === 200) {
         handleClose();
         // Our logic after success sign in
         navigate("/login");

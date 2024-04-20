@@ -25,7 +25,7 @@ const Header = () => {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="/" style={{"color":'gold'}}>
-          <FontAwesomeIcon icon={faVideoSlash}/>Gold
+          <FontAwesomeIcon icon={faVideoSlash}/>GoldSet
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
