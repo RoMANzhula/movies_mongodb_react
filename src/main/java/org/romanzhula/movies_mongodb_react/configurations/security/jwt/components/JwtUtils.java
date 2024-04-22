@@ -27,9 +27,6 @@ public class JwtUtils {
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${app.jwtExpirationMs}")
-    private int jwtExpiration;
-
     @Value("${app.jwtCookieName}")
     private String jwtCookie;
 
@@ -109,17 +106,14 @@ public class JwtUtils {
                 .build()
                 .parse(authToken)
             ;
-        } catch (MalformedJwtException e) {
-            logger.error("JWT token is invalid: {}", e.getMessage());
-        } catch (ExpiredJwtException e) {
-            logger.error("JWT token is expired: {}", e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            logger.error("JWT token is unsupported: {}", e.getMessage());
-        } catch (IllegalArgumentException e) {
-            logger.error("JWT claims string is empty: {}", e.getMessage());
-        }
 
-        return false;
+            return true;
+
+        } catch (JwtException e) {
+            logger.error("JWT token validation error: {}", e.getMessage());
+            return false;
+        }
     }
+
 
 }

@@ -1,5 +1,6 @@
 package org.romanzhula.movies_mongodb_react.configurations;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,13 +10,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer{
+    @Value("${allowed_cross_origin}")
+    private String allowedOrigin;
+
+
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")
+                        .allowedOrigins(allowedOrigin)
                         .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(false)
@@ -23,4 +28,5 @@ public class WebMvcConfig implements WebMvcConfigurer{
             }
         };
     }
+
 }
