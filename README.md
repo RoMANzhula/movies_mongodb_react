@@ -1,5 +1,5 @@
 # Online Cinema player    
-  This application shows us set of best movies on current time. 
+  This application shows us set of best movies on current time. Online cinema.
 ## Use technology:
 * Java 21
 * Spring Boot
